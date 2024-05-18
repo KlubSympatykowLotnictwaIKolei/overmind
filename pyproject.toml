@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "overmind"
+version = "0.1.0"
+description = ""
+authors = ["drzezga <19654689+drzezga@users.noreply.github.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.111.0"
+redis = "^5.0.4"
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.4.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
