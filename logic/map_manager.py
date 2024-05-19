@@ -24,7 +24,7 @@ class MapManager:
         else:
             self.detections[len(self.detections)] = [detection] #new tank
             
-    def get_map(self):
+    def get_map(self) -> list[DetectionMessage]:
         #return union of detections and predictions
         self.calculate_predictions()
 
@@ -52,9 +52,6 @@ class MapManager:
         return (detection1.lat - detection2.lat)**2 + (detection1.lon - detection2.lon)**2
     
     def timestamp_now(self,):
-        pass
-
-    def get_direction(self, detection1: DetectionMessage, detection2: DetectionMessage):
         pass
 
     def get_prediction(self, detection: DetectionMessage, last_known_position: DetectionMessage, speed: Tuple[float, float]):
