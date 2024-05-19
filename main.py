@@ -1,2 +1,5 @@
+from src.overmind import Overmind
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    overmind = Overmind()
+    overmind.think()
