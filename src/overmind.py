@@ -16,6 +16,12 @@ class Overmind:
         self.detected_objects = []
         self.drone_paths = {}
 
+    def get_detection(self):
+        return self.detected_objects
+
+    def get_drone_positions(self):
+        return self.drone_positions
+
     async def think(self):
         for message in self.pubsub.listen():
             # Sleep to allow other tasks to run (if necessary)

@@ -1,5 +1,6 @@
 import random
 from typing import List, Tuple
+from models.Detection import Detection
 from models.messages.DetectionMessage import DetectionMessage
 
 
@@ -8,7 +9,7 @@ class MapManager:
     predictions: List[DetectionMessage]
     delta = 1 #miliseconds
 
-    def push_detection(self, detection: DetectionMessage):
+    def push_detection(self, detection: Detection):
         (minKey, minDist) = (None, None)
 
         #get closest detection to the one we have here
@@ -18,7 +19,8 @@ class MapManager:
                 (minKey, minDist) = (key, dist)
 
         if random.random() < 0.5: #todo: HOW THE FUCK DO I KNOW IF THIS IS THE TANK I ALREADY KNOW OR A NEW ONE? I KNOW HOW TO DO IT BUT IM TOO LAZY IDGAF
-            self.detections[minKey].append(detection) #existing tank
+            detection_message = DetectionMessage(drone_id=detection.drone_id, is_prediction=False, lat=detection.lat, lon=detection.lon, object_class=detection.object_class, timestamp=detection.timestamp)
+            self.detections[minKey].append(detection_message) #existing tank
         else:
             self.detections[len(self.detections)] = [detection] #new tank
             
@@ -43,7 +45,7 @@ class MapManager:
                 continue
 
             if val[-1].timestamp - self.timestamp_now() < self.delta and val[-2].timestamp - self.timestamp_now() < self.delta:
-                prediction = self.get_prediction(val[-1], val[-2])
+                prediction = self.get_prediction(val[-1], val[-2]) #will have is_prediction set to True
                 self.predictions.append(prediction)
 
     def calculate_distance(self, detection1: DetectionMessage, detection2: DetectionMessage):
