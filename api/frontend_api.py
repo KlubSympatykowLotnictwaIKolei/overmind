@@ -1,6 +1,7 @@
 import json
 import websockets
 
+from models.messages.MapMessage import MapMessage
 from models.messages.StatusMessage import StatusMessage
 
 class FrontendApi: 
@@ -15,7 +16,7 @@ class FrontendApi:
 
 
     #{type: detections, detections: [drone_id: 5, object_class: 43, timestamp: 2343222, lat: 51.32332, lon: 22.432432]}
-    async def send_map(self, map_message):
+    async def send_map(self, map_message: MapMessage):
         detections = map_message.detections
         map_message = {"type": "detections", "detections": detections}
         for socket in self.websocket.sockets:
