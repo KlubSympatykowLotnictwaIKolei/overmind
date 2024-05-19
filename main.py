@@ -1,5 +1,6 @@
 from src.overmind import Overmind
+import asyncio
 
 if __name__ == "__main__":
     overmind = Overmind()
-    overmind.think()
+    asyncio.run(overmind.think())
